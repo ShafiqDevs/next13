@@ -17,13 +17,15 @@ export default function handler(
 	console.log(__dirname);
 	console.log(__filename);
 
+	let msg: string;
+
 	exec(
 		`python -c "print('python ci here')"`,
 		(err: any, stdout: any, stderr: any) => {
 			console.log(`cat worked fine`);
-			console.log({ stdout, stderr, err });
+			console.log();
+			msg = JSON.stringify({ stdout, stderr, err });
+			res.status(200).json({ name: msg });
 		}
 	);
-
-	res.status(200).json({ name: 'John Doe' });
 }
